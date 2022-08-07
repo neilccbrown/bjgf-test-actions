@@ -1,0 +1,60 @@
+Greenfoot interface translations and translators
+
+The next update column indicates whether it is likely that the translator will do the next update.
+
+language        last update     next update    comment                  translator
+                (* = after                     including english
+                 release)                      rev no sent.
+--------------------------------------------------------------------------------------------------------------
+arabic          3.1.0*           x    labels+dialog+frames, Rev: 16028      Hakim Hadjaissa <hakimsi@yahoo.com>
+brazilian                                          tutorial
+                                 x             all Rev: 17226               Jhonatan Morais <jhonatanvinicius@gmail.com>
+
+chinese			3.0.2                          all Rev: 15091               He Qing <hawking329@sina.com>
+czech			3.0.0			 x             all Rev: 14946               Zdeněk Chalupský <chalzd@gmail.com>
+dutch			3.0.0            x             all Rev: 14946               Renske Smetsers-Weeda <renske.weeda@gmail.com> (apologised temporary)
+                                          labels+frames, Rev: 16028           Filip Declercq <filip_declercq@yahoo.com> (offered help translation)
+
+french          1.5.0            x    labels+dialog+frames, Rev: 14946      Pierre Lefebvre and Denis Bureau <D.Bureau@esiee.fr>
+german          3.0.0            x             all Rev: 14946               Martin Schleyer sent updates after BJ 4.1.2 for BJ and
+                                                                             GF but not sure which en-labels they match
+                                                                            stefan mueller <stefan.mueller@hof-university.de>; Michael Kolling
+                                                                             Matthias Taulien <mail@m-taulien.de> offered help translation
+
+greek           1.5.0            x    labels+dialog+frames, Rev: 14946      Elevtherios Chrysochoidis <it1370@uom.edu.gr>
+italian         3.0.0            x             all Rev: 14924               Stefano Federici <s_federici@yahoo.com>
+korean          2.1.2*                             labels
+polish          3.0.0            x             all Rev: 14946               Przemysław Adam Śmiejek <informatyk@zso5.zabrze.pl>
+portuguese      3.0.0            x             all Rev: 14946               Paulo Abadie <paulo.abadie@gmail.com> and Fabio Hedayioglu <F.D.L.Hedayioglu@kent.ac.uk>
+                                                                             Angelo de Oliveira <mrxyztplk@gmail.com> offered help translation
+
+russian         1.5.5
+spanish         1.5.5            x    labels+dialog+frames, Rev: 14946      Cabral Ignacio (<icabral@itesm.mx> or <nacho.cabral@gmail.com>) [Nothing yet]
+                                                                            José Ramón Puente Lerma <puenram@gmail.com> did the BJ side labels. He is
+                                                                            credited here for now as he asked to translate GF.
+
+IMPORTANT:
+When adding a new translation, it should be added in the build scripts: package/build.xml and package/greenfoot-build.xml
+It should also be added to bluej.defs and greenfoot.defs so users can see the available languages.
+
+
+IMPORTANT:
+Translations need to be encoded using Latin-1 (ISO-8859-1) encoding; characters not representable in Latin-1 must be written
+as "Unicode-encoded characters" (\uXXXX notation) as produced by the "native2ascii" utility that comes with the JDK.
+
+The code templates however should be encoded in UTF-8.
+
+
+language        old translators
+--------------------------------------------------------------------------------------------------------------
+brazilian       Herodoto Bento-DeMello <herodotomello@yahoo.com.br>
+french          Guillaume Baudoin <gbaudoin@gmail.com>
+german          Matthias Taulien <mail@m-taulien.de>
+greek           Dragon Turtle <super_provato@hotmail.com>
+indian          Kiran Kumar D <mail2dkiran@gmail.com>
+malayalam       K.R.Arun <code333@gmail.com>
+spanish         Esteban Iglesias Manriquez <estbaniglesiasmanriquez@gmail.com> AND Kenneth Daly AND Iris Gutierrez <igutierrez@cubecorp.com.ar> AND Luis Mijangos
+russian         Sergey Zemlyannikov <serveren@mail.ru>
+chinese			Wobot Yuan <wobotyuan@qq.com>
+dutch			Erik van Veen <erikvanveen_2@hotmail.com>
+korean          John Kim <johnkim@kmu.ac.kr>
