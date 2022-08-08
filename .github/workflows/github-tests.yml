@@ -20,7 +20,7 @@ jobs:
           cp bluej/build.properties.template bluej/build.properties
           sed -i 's/build_java_home=.*/build_java_home=\/usr\/lib\/jvm\/java-17-openjdk-amd64\//' bluej/build.properties
           sed -i 's/openjfx_path.*/openjfx_path=\/usr\/share\/openjfx\//' bluej/build.properties
-          #sed -i 's/openjfx_monocle_path.*/openjfx_monocle_path=\/usr\/share\/openjfx_monocle-sdk-gluon-17.0.3\//' bluej/build.properties
+          sed -i 's/openjfx_monocle_path.*/openjfx_monocle_path=\/usr\/share\/openjfx\//' bluej/build.properties
           JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 cd bluej && ant clean && ant update-version-number && ant ready-to-run && xvfb-run ant test && cd ../greenfoot && ant clean && ant update-version-number && ant ready-to-run && xvfb-run ant test && cd .. && bash check-copyright.sh
       - run: echo "This job's status is ${{ job.status }}."
 
