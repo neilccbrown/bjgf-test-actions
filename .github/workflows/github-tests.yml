@@ -39,5 +39,5 @@ jobs:
            choco install sed
            cd ${{ github.workspace }}
            copy bluej/build.properties.template bluej/build.properties
-           sed -i 's/build_java_home=.*/build_java_home=C:\/Program Files\/OpenJDK\//' bluej/build.properties
+           sed -i 's/build_java_home=.*/build_java_home=C:\/Program Files\/OpenJDK\/jdk-17.0.2\//' bluej/build.properties
            cd bluej && ant clean && ant update-version-number && ant windows
