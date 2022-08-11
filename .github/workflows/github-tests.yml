@@ -37,7 +37,7 @@ jobs:
            choco install msys2
            choco install openjdk17
            choco install sed
-           choco installl wget
+           choco install wget
            cd ${{ github.workspace }}
            wget https://download2.gluonhq.com/openjfx/18.0.2/openjfx-18.0.2_windows-x64_bin-sdk.zip
            wget https://download2.gluonhq.com/openjfx/18.0.2/openjfx-18.0.2_monocle-windows-x64_bin-sdk.zip
