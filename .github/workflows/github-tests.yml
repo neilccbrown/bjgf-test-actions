@@ -1,26 +1,43 @@
-name: GitHub Tests
+#name: GitHub Tests
+#on: [push]
+#jobs:
+#  Run-Tests:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
+#      - run: echo "This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+#      - run: echo "The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+#      - name: Check out repository code
+#        uses: actions/checkout@v3
+#      - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
+#      - run: echo " The workflow is now ready to test your code on the runner."
+#      - name: List files in the repository
+#        run: |
+#          sudo apt-get update
+#          sudo apt-get install openjfx openjdk-17-jdk xvfb
+#          ls ${{ github.workspace }}
+#          cd ${{ github.workspace }}
+#          cp bluej/build.properties.template bluej/build.properties
+#          sed -i 's/build_java_home=.*/build_java_home=\/usr\/lib\/jvm\/java-17-openjdk-amd64\//' bluej/build.properties
+#          sed -i 's/openjfx_path.*/openjfx_path=\/usr\/share\/openjfx\//' bluej/build.properties
+#          sed -i 's/openjfx_monocle_path.*/openjfx_monocle_path=\/usr\/share\/openjfx\//' bluej/build.properties
+#          JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 cd bluej && ant clean && ant update-version-number && ant ready-to-run && xvfb-run ant test && cd ../greenfoot && ant clean && ant update-version-number && ant ready-to-run && xvfb-run ant test && cd .. && bash check-copyright.sh
+#      - run: echo "This job's status is ${{ job.status }}."
+
+name: Github Installers
 on: [push]
 jobs:
-  Run-Tests:
-    runs-on: ubuntu-latest
+  Build-Windows:
+    runs-on: windows-latest
     steps:
-      - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v3
-      - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo " The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          sudo apt-get update
-          sudo apt-get install openjfx openjdk-17-jdk xvfb
-          ls ${{ github.workspace }}
-          cd ${{ github.workspace }}
-          cp bluej/build.properties.template bluej/build.properties
-          sed -i 's/build_java_home=.*/build_java_home=\/usr\/lib\/jvm\/java-17-openjdk-amd64\//' bluej/build.properties
-          sed -i 's/openjfx_path.*/openjfx_path=\/usr\/share\/openjfx\//' bluej/build.properties
-          sed -i 's/openjfx_monocle_path.*/openjfx_monocle_path=\/usr\/share\/openjfx\//' bluej/build.properties
-          JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 cd bluej && ant clean && ant update-version-number && ant ready-to-run && xvfb-run ant test && cd ../greenfoot && ant clean && ant update-version-number && ant ready-to-run && xvfb-run ant test && cd .. && bash check-copyright.sh
-      - run: echo "This job's status is ${{ job.status }}."
-
+       - name: Check out repository code
+         uses: actions/checkout@v3
+       - run: |
+           choco install wixtoolset
+           choco install msys2
+           choco install openjdk17
+           choco install sed
+           cd ${{ github.workspace }}
+           copy bluej/build.properties.template bluej/build.properties
+           sed -i 's/build_java_home=.*/build_java_home=C:\/Program Files\/OpenJDK\//' bluej/build.properties
+           cd bluej && ant clean && ant update-version-number && ant windows
