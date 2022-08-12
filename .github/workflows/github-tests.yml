@@ -42,8 +42,8 @@ jobs:
        - name: Install JavaFX and build
          run: |
            cd ${{ github.workspace }}
-           wget https://download2.gluonhq.com/openjfx/18.0.2/openjfx-18.0.2_windows-x64_bin-sdk.zip
-           wget https://download2.gluonhq.com/openjfx/18.0.2/openjfx-18.0.2_monocle-windows-x64_bin-sdk.zip
+           wget --no-verbose https://download2.gluonhq.com/openjfx/18.0.2/openjfx-18.0.2_windows-x64_bin-sdk.zip
+           wget --no-verbose https://download2.gluonhq.com/openjfx/18.0.2/openjfx-18.0.2_monocle-windows-x64_bin-sdk.zip
            mkdir javafx && cd javafx && unzip ../openjfx-18.0.2_windows-x64_bin-sdk.zip && cd ..
            mkdir javafx-monocle && cd javafx-monocle && unzip ../openjfx-18.0.2_monocle-windows-x64_bin-sdk.zip && cd ..
            copy bluej/build.properties.template bluej/build.properties
