@@ -40,6 +40,9 @@ jobs:
            choco install openjdk17 -r --no-progress
            choco install sed -r --no-progress
            choco install wget -r --no-progress
+       - name: Check install locations
+         run: |
+           dir C:/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin
        - name: Install JavaFX and build
          run: |
            cd ${{ github.workspace }}
