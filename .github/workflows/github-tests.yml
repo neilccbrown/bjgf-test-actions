@@ -32,12 +32,15 @@ jobs:
     steps:
        - name: Check out repository code
          uses: actions/checkout@v3
+       - name: Install choco packages
        - run: |
-           choco install wixtoolset
-           choco install msys2
-           choco install openjdk17
-           choco install sed
-           choco install wget
+           choco install wixtoolset -r
+           choco install msys2 -r
+           choco install openjdk17 -r
+           choco install sed -r
+           choco install wget -r
+       - name: Install JavaFX and build
+       - run: |
            cd ${{ github.workspace }}
            wget https://download2.gluonhq.com/openjfx/18.0.2/openjfx-18.0.2_windows-x64_bin-sdk.zip
            wget https://download2.gluonhq.com/openjfx/18.0.2/openjfx-18.0.2_monocle-windows-x64_bin-sdk.zip
