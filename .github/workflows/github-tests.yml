@@ -57,5 +57,5 @@ jobs:
            sed -i 's/openjfx_path=.*/openjfx_path=D:\/a\/bjgf-test-actions\/bjgf-test-actions\/javafx\/javafx-sdk-18.0.2/' bluej/build.properties
            sed -i 's/openjfx_monocle_path=.*/openjfx_monocle_path=D:\/a\/bjgf-test-actions\/bjgf-test-actions\/javafx-monocle\/javafx-sdk-18.0.2/' bluej/build.properties
            sed -i 's/mingw_root=.*/mingw_root=C:\/ProgramData\/chocolatey\/lib\/mingw\/tools\/install\/mingw64/' bluej/build.properties
-           sed -i 's/wix_bin=.*/wix_bin=C:\/Program Files (x86)\/Windows Installer XML v3.11\/bin/' bluej/build.properties
+           sed -i 's/wix_bin=.*/wix_bin=C:\/Program Files (x86)\/WiX Toolset v3.11\/bin/' bluej/build.properties
            cd bluej && ant clean && ant update-version-number && ant windows
