@@ -34,11 +34,12 @@ jobs:
          uses: actions/checkout@v3
        - name: Install choco packages
          run: |
-           choco install wixtoolset -r
-           choco install msys2 -r
-           choco install openjdk17 -r
-           choco install sed -r
-           choco install wget -r
+           choco install wixtoolset -r --no-progress
+           choco install msys2 -r --no-progress
+           choco install mingw -r --no-progress
+           choco install openjdk17 -r --no-progress
+           choco install sed -r --no-progress
+           choco install wget -r --no-progress
        - name: Install JavaFX and build
          run: |
            cd ${{ github.workspace }}
@@ -47,7 +48,8 @@ jobs:
            mkdir javafx && cd javafx && unzip ../openjfx-18.0.2_windows-x64_bin-sdk.zip && cd ..
            mkdir javafx-monocle && cd javafx-monocle && unzip ../openjfx-18.0.2_monocle-windows-x64_bin-sdk.zip && cd ..
            copy bluej/build.properties.template bluej/build.properties
-           sed -i 's/build_java_home=.*/build_java_home=C:\/Program Files\/OpenJDK\/jdk-17.0.2\//' bluej/build.properties
-           sed -i 's/openjfx_path=.*/openjfx_path=D:\/a\/bjgf-test-actions\/bjgf-test-actions\/javafx\/javafx-sdk-18.0.2\//' bluej/build.properties
-           sed -i 's/openjfx_monocle_path=.*/openjfx_monocle_path=D:\/a\/bjgf-test-actions\/bjgf-test-actions\/javafx-monocle\/javafx-sdk-18.0.2\//' bluej/build.properties
+           sed -i 's/build_java_home=.*/build_java_home=C:\/Program Files\/OpenJDK\/jdk-17.0.2/' bluej/build.properties
+           sed -i 's/openjfx_path=.*/openjfx_path=D:\/a\/bjgf-test-actions\/bjgf-test-actions\/javafx\/javafx-sdk-18.0.2/' bluej/build.properties
+           sed -i 's/openjfx_monocle_path=.*/openjfx_monocle_path=D:\/a\/bjgf-test-actions\/bjgf-test-actions\/javafx-monocle\/javafx-sdk-18.0.2/' bluej/build.properties
+           sed -i 's/mingw_root=.*/mingw_root=C:\/ProgramData\/chocolatey\/lib\/mingw\/tools\/install\/mingw64\/bin/' bluej/build.properties
            cd bluej && ant clean && ant update-version-number && ant windows
