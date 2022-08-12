@@ -43,6 +43,7 @@ jobs:
        - name: Check install locations
          run: |
            dir C:/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin
+           dir C:/Program Files/
        - name: Install JavaFX and build
          run: |
            cd ${{ github.workspace }}
@@ -54,5 +55,5 @@ jobs:
            sed -i 's/build_java_home=.*/build_java_home=C:\/Program Files\/OpenJDK\/jdk-17.0.2/' bluej/build.properties
            sed -i 's/openjfx_path=.*/openjfx_path=D:\/a\/bjgf-test-actions\/bjgf-test-actions\/javafx\/javafx-sdk-18.0.2/' bluej/build.properties
            sed -i 's/openjfx_monocle_path=.*/openjfx_monocle_path=D:\/a\/bjgf-test-actions\/bjgf-test-actions\/javafx-monocle\/javafx-sdk-18.0.2/' bluej/build.properties
-           sed -i 's/mingw_root=.*/mingw_root=C:\/ProgramData\/chocolatey\/lib\/mingw\/tools\/install\/mingw64\/bin/' bluej/build.properties
+           sed -i 's/mingw_root=.*/mingw_root=C:\/ProgramData\/chocolatey\/lib\/mingw\/tools\/install\/mingw64/' bluej/build.properties
            cd bluej && ant clean && ant update-version-number && ant windows
