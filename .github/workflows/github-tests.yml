@@ -45,6 +45,7 @@ jobs:
            dir C:/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin
            dir 'C:/Program Files/'
            dir 'C:/Program Files (x86)/'
+           dir 'C:/Program Files (x86)/WiX Toolset v3.11/bin'
        - name: Install JavaFX and build
          run: |
            cd ${{ github.workspace }}
