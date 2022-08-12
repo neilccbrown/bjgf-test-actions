@@ -43,7 +43,7 @@ jobs:
        - name: Check install locations
          run: |
            dir C:/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin
-           dir C:/Program Files/
+           dir 'C:/Program Files/'
        - name: Install JavaFX and build
          run: |
            cd ${{ github.workspace }}
