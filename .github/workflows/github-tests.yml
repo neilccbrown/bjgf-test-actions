@@ -31,9 +31,9 @@ jobs:
           cd bluej && ant clean && ant update-version-number && ant ready-to-run && xvfb-run ant test && cd ../greenfoot && ant clean && ant update-version-number && ant ready-to-run && xvfb-run ant test && cd .. && bash check-copyright.sh
       - run: echo "This job's status is ${{ job.status }}."
 
-name: Github Installers
-on: [push]
-jobs:
+#name: Github Installers
+#on: [push]
+#jobs:
   Build-Windows:
     runs-on: windows-latest
     steps:
