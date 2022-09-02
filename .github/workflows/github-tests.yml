@@ -98,3 +98,34 @@ jobs:
              bluej/package/BlueJ-generic*.jar
              bluej/package/BlueJ-source*.zip
 
+  Build-Mac:
+    runs-on: macos-latest
+    steps:
+       - name: Check out repository code
+         uses: actions/checkout@v3
+       - name: Install Java
+         uses: actions/setup-java@v3
+         with:
+           distribution: 'temurin'
+           java-version: '17'
+           java-package: jdk
+           architecture: x64
+#       - name: Install packages
+#         run: |
+#           sudo apt install fakeroot
+#           sudo apt install openjdk-17-jdk
+       - name: Check install locations
+         run: |
+           ls $JAVA_HOME
+       - name: Install JavaFX and build
+         run: |
+           cd ${{ github.workspace }}
+           wget --no-verbose https://download2.gluonhq.com/openjfx/18.0.2/openjfx-18.0.2_osx-x64_bin-sdk.zip
+           mkdir javafx && cd javafx && unzip ../openjfx-*.zip && cd ..
+           cp bluej/build.properties.template bluej/build.properties
+           sed -i "s:build_java_home=.*:build_java_home=$JAVA_HOME:" bluej/build.properties
+           sed -i 's:openjfx_path=.*:openjfx_path=${{ github.workspace }}/javafx/javafx-sdk-18.0.2:' bluej/build.properties
+           sed -i 's:openjfx_monocle_path=.*:openjfx_monocle_path=${{ github.workspace }}/javafx/javafx-sdk-18.0.2:' bluej/build.properties
+           cd bluej && ant clean && ant update-version-number && ant mac
+
+     
