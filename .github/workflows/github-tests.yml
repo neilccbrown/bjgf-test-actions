@@ -123,7 +123,7 @@ jobs:
            wget --no-verbose https://download2.gluonhq.com/openjfx/18.0.2/openjfx-18.0.2_osx-x64_bin-sdk.zip
            mkdir javafx && cd javafx && unzip ../openjfx-*.zip && cd ..
            cp bluej/build.properties.template bluej/build.properties
-           sed -i "s:build_java_home=.*:build_java_home=$JAVA_HOME:" bluej/build.properties
+           sed -i 's:build_java_home=.*:build_java_home='"$JAVA_HOME"':' bluej/build.properties
            sed -i 's:openjfx_path=.*:openjfx_path=${{ github.workspace }}/javafx/javafx-sdk-18.0.2:' bluej/build.properties
            sed -i 's:openjfx_monocle_path=.*:openjfx_monocle_path=${{ github.workspace }}/javafx/javafx-sdk-18.0.2:' bluej/build.properties
            cd bluej && ant clean && ant update-version-number && ant mac
