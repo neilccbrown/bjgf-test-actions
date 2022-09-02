@@ -139,7 +139,7 @@ jobs:
            sed -i '.bak' 's:openjfx_monocle_path=.*:openjfx_monocle_path=${{ github.workspace }}/javafx/javafx-sdk-18.0.2:' bluej/build.properties
            # TODO make this a property:
            sed -i '.bak' 's:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk:${{ github.workspace}}/MacOSX10.12.sdk:' bluej/package/macfiles/nativelauncher/compile.sh
-           cd bluej && ant clean && ant update-version-number && ant mac
+           cd bluej && ant clean && ant update-version-number && ant mac && cd ..
            # We don't need this installer:
            rm bluej/package/BlueJ-mac-legacy*zip
        - name: Archive Mac installers
