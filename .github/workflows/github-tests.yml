@@ -64,7 +64,7 @@ jobs:
            mkdir javafx && cd javafx && unzip ../openjfx-18.0.2_windows-x64_bin-sdk.zip && cd ..
            mkdir javafx-monocle && cd javafx-monocle && unzip ../openjfx-18.0.2_monocle-windows-x64_bin-sdk.zip && cd ..
            copy bluej/build.properties.template bluej/build.properties
-           sed -i 's/build_java_home=.*/build_java_home=$JAVA_HOME/' bluej/build.properties
+           sed -i 's/build_java_home=.*/build_java_home=%JAVA_HOME%/' bluej/build.properties
            sed -i 's/openjfx_path=.*/openjfx_path=D:\/a\/bjgf-test-actions\/bjgf-test-actions\/javafx\/javafx-sdk-18.0.2/' bluej/build.properties
            sed -i 's/openjfx_monocle_path=.*/openjfx_monocle_path=D:\/a\/bjgf-test-actions\/bjgf-test-actions\/javafx-monocle\/javafx-sdk-18.0.2/' bluej/build.properties
            sed -i 's/mingw_root=.*/mingw_root=C:\/ProgramData\/chocolatey\/lib\/mingw\/tools\/install\/mingw64/' bluej/build.properties
