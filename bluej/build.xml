@@ -430,7 +430,6 @@
             <formatter type="brief" usefile="false"/>
 
             <jvmarg value="-Dtestfx.robot=glass"/>
-            <jvmarg value="-Dprism.order=sw"/>
             <jvmarg value="-Dprism.text=t2k"/>
             <jvmarg value="-Dtestfx.setup.timeout=5000"/>
 
