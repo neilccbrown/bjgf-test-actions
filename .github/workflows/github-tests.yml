@@ -65,7 +65,7 @@ jobs:
            mkdir javafx-monocle && cd javafx-monocle && unzip ../openjfx-18.0.2_monocle-windows-x64_bin-sdk.zip && cd ..
            copy bluej/build.properties.template bluej/build.properties
            $propfile = 'bluej/build.properties'
-           $java_home_forward = $env:JAVA_HOME -replace '[\\]' '/'
+           $java_home_forward = $env:JAVA_HOME -replace '[\\]', '/'
            (Get-Content $propfile) -replace 'build_java_home=.*', "build_java_home=$java_home_forward" | Set-Content $propfile
            sed -i 's/openjfx_path=.*/openjfx_path=D:\/a\/bjgf-test-actions\/bjgf-test-actions\/javafx\/javafx-sdk-18.0.2/' bluej/build.properties
            sed -i 's/openjfx_monocle_path=.*/openjfx_monocle_path=D:\/a\/bjgf-test-actions\/bjgf-test-actions\/javafx-monocle\/javafx-sdk-18.0.2/' bluej/build.properties
