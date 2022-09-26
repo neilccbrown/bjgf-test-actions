@@ -4,13 +4,8 @@ jobs:
   Run-Tests:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
         uses: actions/checkout@v3
-      - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo " The workflow is now ready to test your code on the runner."
       - name: Install Java
         uses: actions/setup-java@v3
         with:
@@ -21,7 +16,7 @@ jobs:
       - name: Run tests
         run: |
           sudo apt-get update
-          sudo apt-get install openjfx xvfb
+          sudo apt-get install xvfb
           ls ${{ github.workspace }}
           cd ${{ github.workspace }}
           wget --no-verbose https://download2.gluonhq.com/openjfx/18.0.2/openjfx-18.0.2_linux-x64_bin-sdk.zip
@@ -41,12 +36,18 @@ jobs:
     steps:
        - name: Check out repository code
          uses: actions/checkout@v3
+       - name: Install Java
+         uses: actions/setup-java@v3
+         with:
+           distribution: 'temurin'
+           java-version: '17'
+           java-package: jdk
+           architecture: x64
        - name: Install choco packages
          run: |
            choco install wixtoolset -r --no-progress
            choco install msys2 -r --no-progress
            choco install mingw -r --no-progress
-           choco install openjdk17 -r --no-progress
            choco install sed -r --no-progress
            choco install wget -r --no-progress
        - name: Check install locations
@@ -63,7 +64,7 @@ jobs:
            mkdir javafx && cd javafx && unzip ../openjfx-18.0.2_windows-x64_bin-sdk.zip && cd ..
            mkdir javafx-monocle && cd javafx-monocle && unzip ../openjfx-18.0.2_monocle-windows-x64_bin-sdk.zip && cd ..
            copy bluej/build.properties.template bluej/build.properties
-           sed -i 's/build_java_home=.*/build_java_home=C:\/Program Files\/OpenJDK\/jdk-17.0.2/' bluej/build.properties
+           sed -i 's/build_java_home=.*/build_java_home=$JAVA_HOME/' bluej/build.properties
            sed -i 's/openjfx_path=.*/openjfx_path=D:\/a\/bjgf-test-actions\/bjgf-test-actions\/javafx\/javafx-sdk-18.0.2/' bluej/build.properties
            sed -i 's/openjfx_monocle_path=.*/openjfx_monocle_path=D:\/a\/bjgf-test-actions\/bjgf-test-actions\/javafx-monocle\/javafx-sdk-18.0.2/' bluej/build.properties
            sed -i 's/mingw_root=.*/mingw_root=C:\/ProgramData\/chocolatey\/lib\/mingw\/tools\/install\/mingw64/' bluej/build.properties
