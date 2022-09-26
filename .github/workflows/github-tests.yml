@@ -24,11 +24,13 @@ jobs:
           sudo apt-get install openjfx xvfb
           ls ${{ github.workspace }}
           cd ${{ github.workspace }}
+          wget --no-verbose https://download2.gluonhq.com/openjfx/18.0.2/openjfx-18.0.2_linux-x64_bin-sdk.zip
+          mkdir javafx && cd javafx && unzip ../openjfx-18.0.2_linux-x64_bin-sdk.zip && cd ..
           cp bluej/build.properties.template bluej/build.properties
           sed -i "s:build_java_home=.*:build_java_home=$JAVA_HOME:" bluej/build.properties
-          sed -i 's/openjfx_path.*/openjfx_path=\/usr\/share\/openjfx\//' bluej/build.properties
-          sed -i 's/openjfx_monocle_path.*/openjfx_monocle_path=\/usr\/share\/openjfx\//' bluej/build.properties
-          cd bluej && ant clean && ant update-version-number && ant ready-to-run && xvfb-run ant test-headed && cd ../greenfoot && ant clean && ant update-version-number && ant ready-to-run && xvfb-run ant test && cd .. && bash check-copyright.sh
+          sed -i 's:openjfx_path=.*:openjfx_path=${{ github.workspace }}/javafx/javafx-sdk-18.0.2:' bluej/build.properties
+          sed -i 's:openjfx_monocle_path=.*:openjfx_monocle_path=${{ github.workspace }}/javafx/javafx-sdk-18.0.2:' bluej/build.properties
+          cd bluej && ant clean && ant update-version-number && ant ready-to-run && xvfb-run --auto-servernum ant test-headed && cd ../greenfoot && ant clean && ant update-version-number && ant ready-to-run && xvfb-run ant test && cd .. && bash check-copyright.sh
       - run: echo "This job's status is ${{ job.status }}."
 
 #name: Github Installers
