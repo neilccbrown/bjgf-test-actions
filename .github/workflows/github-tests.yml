@@ -1,5 +1,7 @@
 name: GitHub Tests
 on: [push]
+env:
+  java_version: '17'
 jobs:
   Run-Tests:
     runs-on: ubuntu-latest
@@ -10,7 +12,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: ${{ env.java_version }}
           java-package: jdk
           architecture: x64
       - name: Run tests
@@ -40,7 +42,7 @@ jobs:
          uses: actions/setup-java@v3
          with:
            distribution: 'temurin'
-           java-version: '17'
+           java-version: ${{ env.java_version }}
            java-package: jdk
            architecture: x64
        - name: Install choco packages
@@ -84,20 +86,26 @@ jobs:
     steps:
        - name: Check out repository code
          uses: actions/checkout@v3
+       - name: Install Java
+         uses: actions/setup-java@v3
+         with:
+           distribution: 'temurin'
+           java-version: ${{ env.java_version }}
+           java-package: jdk
+           architecture: x64
        - name: Install packages
          run: |
            sudo apt install fakeroot
-           sudo apt install openjdk-17-jdk
        - name: Check install locations
          run: |
-           ls /usr/lib/jvm/java-17-openjdk-amd64/
+           ls $JAVA_HOME
        - name: Install JavaFX and build
          run: |
            cd ${{ github.workspace }}
            wget --no-verbose https://download2.gluonhq.com/openjfx/18.0.2/openjfx-18.0.2_linux-x64_bin-sdk.zip
            mkdir javafx && cd javafx && unzip ../openjfx-18.0.2_linux-x64_bin-sdk.zip && cd ..
            cp bluej/build.properties.template bluej/build.properties
-           sed -i 's:build_java_home=.*:build_java_home=/usr/lib/jvm/java-17-openjdk-amd64:' bluej/build.properties
+           sed -i "s:build_java_home=.*:build_java_home=$JAVA_HOME:" bluej/build.properties
            sed -i 's:openjfx_path=.*:openjfx_path=${{ github.workspace }}/javafx/javafx-sdk-18.0.2:' bluej/build.properties
            sed -i 's:openjfx_monocle_path=.*:openjfx_monocle_path=${{ github.workspace }}/javafx/javafx-sdk-18.0.2:' bluej/build.properties
            cd bluej && ant clean && ant update-version-number && fakeroot ant debian
@@ -119,7 +127,7 @@ jobs:
          uses: actions/setup-java@v3
          with:
            distribution: 'temurin'
-           java-version: '17'
+           java-version: ${{ env.java_version }}
            java-package: jdk
            architecture: x64
        - name: Install packages
