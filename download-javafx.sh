@@ -10,6 +10,6 @@ base="https://repo1.maven.org/maven2/org/openjfx/"
 mkdir lib
 for module in $modules
 do
-  wget $base$module/$javafxversion/$module-$javafxversion-$os.jar
+  wget --no-verbose $base$module/$javafxversion/$module-$javafxversion-$os.jar
   mv $module-$javafxversion-$os.jar lib/${module//-/.}.jar
 done
