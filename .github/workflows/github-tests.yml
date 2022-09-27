@@ -61,16 +61,13 @@ jobs:
        - name: Install JavaFX and build
          run: |
            cd ${{ github.workspace }}
-           wget --no-verbose https://download2.gluonhq.com/openjfx/18.0.2/openjfx-18.0.2_windows-x64_bin-sdk.zip
-           wget --no-verbose https://download2.gluonhq.com/openjfx/18.0.2/openjfx-18.0.2_monocle-windows-x64_bin-sdk.zip
-           mkdir javafx && cd javafx && unzip ../openjfx-18.0.2_windows-x64_bin-sdk.zip && cd ..
-           mkdir javafx-monocle && cd javafx-monocle && unzip ../openjfx-18.0.2_monocle-windows-x64_bin-sdk.zip && cd ..
+           mkdir javafx && cd javafx && bash ../download-javafx.sh ${{ env.javafx_version }} windows && cd ..
            copy bluej/build.properties.template bluej/build.properties
            $propfile = 'bluej/build.properties'
            $java_home_forward = $env:JAVA_HOME -replace '[\\]', '/'
            (Get-Content $propfile) -replace 'build_java_home=.*', "build_java_home=$java_home_forward" | Set-Content $propfile
-           sed -i 's/openjfx_path=.*/openjfx_path=D:\/a\/bjgf-test-actions\/bjgf-test-actions\/javafx\/javafx-sdk-18.0.2/' bluej/build.properties
-           sed -i 's/openjfx_monocle_path=.*/openjfx_monocle_path=D:\/a\/bjgf-test-actions\/bjgf-test-actions\/javafx-monocle\/javafx-sdk-18.0.2/' bluej/build.properties
+           sed -i 's:openjfx_path=.*:openjfx_path=${{ github.workspace }}/javafx:' bluej/build.properties
+           sed -i 's:openjfx_monocle_path=.*:openjfx_monocle_path=${{ github.workspace }}/javafx:' bluej/build.properties
            sed -i 's/mingw_root=.*/mingw_root=C:\/ProgramData\/chocolatey\/lib\/mingw\/tools\/install\/mingw64/' bluej/build.properties
            sed -i 's/wix_bin=.*/wix_bin=C:\/Program Files (x86)\/WiX Toolset v3.11\/bin/' bluej/build.properties
            cd bluej && ant clean && ant update-version-number && ant windows
@@ -102,12 +99,11 @@ jobs:
        - name: Install JavaFX and build
          run: |
            cd ${{ github.workspace }}
-           wget --no-verbose https://download2.gluonhq.com/openjfx/18.0.2/openjfx-18.0.2_linux-x64_bin-sdk.zip
-           mkdir javafx && cd javafx && unzip ../openjfx-18.0.2_linux-x64_bin-sdk.zip && cd ..
+           mkdir javafx && cd javafx && bash ../download-javafx.sh ${{ env.javafx_version }} linux && cd ..
            cp bluej/build.properties.template bluej/build.properties
            sed -i "s:build_java_home=.*:build_java_home=$JAVA_HOME:" bluej/build.properties
-           sed -i 's:openjfx_path=.*:openjfx_path=${{ github.workspace }}/javafx/javafx-sdk-18.0.2:' bluej/build.properties
-           sed -i 's:openjfx_monocle_path=.*:openjfx_monocle_path=${{ github.workspace }}/javafx/javafx-sdk-18.0.2:' bluej/build.properties
+           sed -i 's:openjfx_path=.*:openjfx_path=${{ github.workspace }}/javafx:' bluej/build.properties
+           sed -i 's:openjfx_monocle_path=.*:openjfx_monocle_path=${{ github.workspace }}/javafx:' bluej/build.properties
            cd bluej && ant clean && ant update-version-number && fakeroot ant debian
        - name: Archive Ubuntu installers
          uses: actions/upload-artifact@v3
@@ -143,13 +139,12 @@ jobs:
        - name: Install JavaFX and build
          run: |
            cd ${{ github.workspace }}
-           wget --no-verbose https://download2.gluonhq.com/openjfx/18.0.2/openjfx-18.0.2_osx-x64_bin-sdk.zip
-           mkdir javafx && cd javafx && unzip ../openjfx-*.zip && cd ..
+           mkdir javafx && cd javafx && bash ../download-javafx.sh ${{ env.javafx_version }} mac && cd ..
            cp bluej/build.properties.template bluej/build.properties
            sed -i '.bak' "s:build_java_home=.*:build_java_home=$JAVA_HOME:" bluej/build.properties
            sed -i '.bak' "s:mac_bundled_jdk_path=.*:mac_bundled_jdk_path=$JAVA_HOME/../..:" bluej/build.properties
-           sed -i '.bak' 's:openjfx_path=.*:openjfx_path=${{ github.workspace }}/javafx/javafx-sdk-18.0.2:' bluej/build.properties
-           sed -i '.bak' 's:openjfx_monocle_path=.*:openjfx_monocle_path=${{ github.workspace }}/javafx/javafx-sdk-18.0.2:' bluej/build.properties
+           sed -i '.bak' 's:openjfx_path=.*:openjfx_path=${{ github.workspace }}/javafx:' bluej/build.properties
+           sed -i '.bak' 's:openjfx_monocle_path=.*:openjfx_monocle_path=${{ github.workspace }}/javafx:' bluej/build.properties
            # TODO make this a property:
            sed -i '.bak' 's:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk:${{ github.workspace}}/MacOSX10.12.sdk:' bluej/package/macfiles/nativelauncher/compile.sh
            cd bluej && ant clean && ant update-version-number && ant mac && cd ..
