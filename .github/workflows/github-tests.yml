@@ -61,7 +61,7 @@ jobs:
        - name: Install JavaFX and build
          run: |
            cd ${{ github.workspace }}
-           mkdir javafx && cd javafx && bash ../download-javafx.sh ${{ env.javafx_version }} windows && cd ..
+           mkdir javafx && cd javafx && bash ../download-javafx.sh ${{ env.javafx_version }} win && cd ..
            copy bluej/build.properties.template bluej/build.properties
            $propfile = 'bluej/build.properties'
            $java_home_forward = $env:JAVA_HOME -replace '[\\]', '/'
