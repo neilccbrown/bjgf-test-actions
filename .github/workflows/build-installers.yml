@@ -147,7 +147,7 @@ jobs:
           cd bluej && ant clean && ant update-version-number && ant mac && cd ..
           cd greenfoot && ant clean && ant update-version-number && ant mac && cd ..
           # We don't need these installers:
-          rm bluej/package/BlueJ-mac-legacy*zip greenfoot/package/BlueJ-mac-legacy*zip
+          rm bluej/package/BlueJ-mac-legacy*zip greenfoot/package/Greenfoot-mac-legacy*zip
       - name: Archive BlueJ Mac installers
         uses: actions/upload-artifact@v3
         with:
