@@ -90,8 +90,8 @@ jobs:
           sed -i "s:build_java_home=.*:build_java_home=$JAVA_HOME:" bluej/build.properties
           sed -i 's:openjfx_path=.*:openjfx_path=${{ github.workspace }}/javafx:' bluej/build.properties
           sed -i 's:openjfx_monocle_path=.*:openjfx_monocle_path=${{ github.workspace }}/javafx:' bluej/build.properties
-          cd bluej && ant clean && ant update-version-number && fakeroot ant debian && cd..
-          cd greenfoot && ant clean && ant update-version-number && fakeroot ant debian && cd..
+          cd bluej && ant clean && ant update-version-number && fakeroot ant debian && cd ..
+          cd greenfoot && ant clean && ant update-version-number && fakeroot ant debian && cd ..
       - name: Archive BlueJ Ubuntu installers
         uses: actions/upload-artifact@v3
         with:
