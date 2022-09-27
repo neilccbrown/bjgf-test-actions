@@ -1,7 +1,7 @@
 name: GitHub Tests
 on: [push]
 env:
-  java_version: '17.0.4.1+1'
+  java_version: '17.0.4.1'
   javafx_version: '17.0.2'
 jobs:
   Run-Tests:
